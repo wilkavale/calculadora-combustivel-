@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Consumo de Combustível</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calculadora de Consumo de Combustível</h1>
+
+        <label for="velocidade">Velocidade média (km/h):</label>
+        <input type="number" id="velocidade" placeholder="Ex: 80">
+
+        <label for="tempo">Tempo de viagem (horas):</label>
+        <input type="number" id="tempo" placeholder="Ex: 2">
+
+        <label for="precoGasolina">Preço da gasolina (por litro):</label>
+        <input type="number" id="precoGasolina" placeholder="Ex: 5.50">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="resultado"></div>
+
+        <div class="footer">
+            <p>Desenvolvido por <strong>Seu Nome</strong> | GitHub Pages</p>
+        </div>
+    </div>
+
+    <script>
+        function calcular() {
+            const velocidade = parseFloat(document.getElementById('velocidade').value);
+            const tempo = parseFloat(document.getElementById('tempo').value);
+            const precoGasolina = parseFloat(document.getElementById('precoGasolina').value);
+
+            if (isNaN(velocidade) || isNaN(tempo) || isNaN(precoGasolina) || velocidade <= 0 || tempo <= 0 || precoGasolina <= 0) {
+                document.getElementById('resultado').innerText = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            const distancia = velocidade * tempo;
+            const litros = distancia / 12.0; // Consumo de 12 km/l
+            const custo = litros * precoGasolina;
+
+            document.getElementById('resultado').innerText = 
+                `Distância percorrida: ${distancia.toFixed(2)} km\n` +
+                `Combustível utilizado: ${litros.toFixed(2)} litros\n` +
+                `Custo estimado: R$ ${custo.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
